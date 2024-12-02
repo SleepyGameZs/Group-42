@@ -23,8 +23,8 @@
     max-height: 500px;
 }
 
-#siteLogo{
-
+#topHeading{
+    padding-top: auto;
 }
 
 #navHeader{
@@ -39,15 +39,28 @@
     height: 300px;
 }
 
+#siteLogo{
+    filter: invert(1);
+}
+
 #heroElements{
     background-color: rgba(66, 66, 66, 0.5);
     height: 150px;
 }
 
-@media (min-width: 724px) {
-    
-}
 #ItemSection{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 724px) {
+    #ItemSection{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    #ItemSection{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
