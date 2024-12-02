@@ -8,7 +8,11 @@
 .detailBoxing{
     border: solid 2px rgb(75, 75, 75);
     box-shadow: 3px 3px 5px rgba(92, 92, 92, 0.5);
+}
 
+.detailBoxing:hover {
+    border: solid 2px rgb(120, 120, 120);
+    box-shadow: 3px 3px 5px rgba(92, 92, 92, 0.5);
 }
 
 #ItemBoxing{
