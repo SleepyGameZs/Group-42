@@ -1,3 +1,5 @@
+const container = document.getElementById("container");
+
 function addToBasket(item) {
   item_num = localStorage.getItem("num");
   if(item_num == null) item_num = 0;
@@ -12,6 +14,7 @@ function addToBasket(item) {
 function removeFromBasket(item_num) {
   localStorage.removeItem(item_num);
   console.log("removed " + item_num);
+  listItems();
 }
 
 function empty() {
@@ -22,17 +25,22 @@ function empty() {
 
 function listItems() {
   console.log("listing items!");
-  let container = document.getElementById("container");
+  container.innerHTML = ""; //empty
+
   let item_count = 1;
   item_num = localStorage.getItem("num");
-  console.log(item_num);
   for(let i = 0; i < item_num; i++) {
     let item = localStorage.getItem(i);
-    console.log(item);
     if(item !== null) {
-      container.innerHTML+="<p id=" + i + ">"+ item_count +". " + item + "<\p>";
+      container.innerHTML+=`<p>${item_count}. ${item} <button onclick='removeFromBasket(${i})'>X <\p>`;
       item_count++;
     }
+  }
+  
+  //reset counter if empty and disable checkout button 
+  if(item_count == 1) {
+    empty();
+    
   }
 }
 
