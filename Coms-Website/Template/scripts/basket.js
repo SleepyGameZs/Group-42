@@ -1,4 +1,5 @@
 const container = document.getElementById("container");
+const shoppingCart = window.parent.document.getElementById("shopping-cart")
 let item_arr = [];
 
 function onInit() {
@@ -19,7 +20,7 @@ function addToBasket(item) {
 
   item_arr.push(item);
   console.log("added " + item);
-
+  updateShoppingCart(item_arr.length);
   localStorage.setItem("items", JSON.stringify(item_arr));
 }
 
@@ -41,6 +42,7 @@ function listItems() {
   
   //if not on basket page
   if(container == null) return;
+
   container.innerHTML = ""; //empty
 
   let item_count = 1;
@@ -55,11 +57,19 @@ function listItems() {
       item_count++;
     }
   }
-  
+
+  //update shopping basket content
+  updateShoppingCart(item_arr.length);
+
   //if empty disable checkout button 
   if(item_count == 1) {
     //TODO
   }
+}
+
+function updateShoppingCart(item_num) {
+  if(shoppingCart == null) return;
+  shoppingCart.textContent = `Shopping Cart (${item_num})`
 }
 
 window.addEventListener("DOMContentLoaded", onInit());
