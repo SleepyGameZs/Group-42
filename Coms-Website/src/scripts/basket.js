@@ -1,5 +1,5 @@
 const container = document.getElementById("container");
-const shoppingCart = window.parent.document.getElementById("shopping-cart")
+const shoppingCart = getShoppingCart();
 let item_arr = [];
 
 function onInit() {
@@ -38,15 +38,17 @@ function empty() {
 }
 
 function listItems() {
-  console.log("listing items!");
-  
+  item_arr = JSON.parse(localStorage.getItem("items"));
+
+  //update shopping basket content
+  updateShoppingCart(item_arr.length);
+
   //if not on basket page
   if(container == null) return;
 
   container.innerHTML = ""; //empty
 
   let item_count = 1;
-  item_arr = JSON.parse(localStorage.getItem("items"));
   //if for some reason no item_arr
   if(item_arr == null) return;
 
@@ -58,18 +60,30 @@ function listItems() {
     }
   }
 
-  //update shopping basket content
-  updateShoppingCart(item_arr.length);
-
   //if empty disable checkout button 
   if(item_count == 1) {
     //TODO
   }
 }
 
+function getShoppingCart() {
+  if (window.parent !== window) {
+    // If in an iframe, return the parent's shopping cart
+    return window.parent.document.getElementById("shopping-cart");
+  } else {
+    // If in the parent window, return the local shopping cart
+    return window.document.getElementById("shopping-cart");
+}
+}
+
 function updateShoppingCart(item_num) {
-  if(shoppingCart == null) return;
-  shoppingCart.textContent = `Shopping Cart (${item_num})`
+  if(shoppingCart !== null) {
+    shoppingCart.textContent = `Shopping Cart (${item_num})`
+  } else if (shoppingCartParent !== null) {
+    shoppingCartParent.textContent = `Shopping Cart (${item_num})`
+  } else {
+    console.log("none!");
+  }
 }
 
 window.addEventListener("DOMContentLoaded", onInit());
