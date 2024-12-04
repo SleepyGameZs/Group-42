@@ -38,6 +38,9 @@ function empty() {
 
 function listItems() {
   console.log("listing items!");
+  
+  //if not on basket page
+  if(container == null) return;
   container.innerHTML = ""; //empty
 
   let item_count = 1;
@@ -55,8 +58,7 @@ function listItems() {
   
   //if empty disable checkout button 
   if(item_count == 1) {
-    
-
+    //TODO
   }
 }
 
