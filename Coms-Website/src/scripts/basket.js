@@ -55,7 +55,7 @@ function listItems() {
   for(let i = 0; i < item_arr.length; i++) {
     let item = item_arr[i];
     if(item !== null) {
-      container.innerHTML+=`<p>${item_count}. ${item} <button class="order-item" onclick='removeFromBasket(${i})'>X <\p>`;
+      container.innerHTML+=`<p>${item_count}. ${item.name} - $${item.cost} <button class="order-item" onclick='removeFromBasket(${i})'>X <\p>`;
       item_count++;
     }
   }
@@ -69,18 +69,18 @@ function listItems() {
 function getShoppingCart() {
   if (window.parent !== window) {
     // If in an iframe, return the parent's shopping cart
-    return window.parent.document.getElementById("shopping-cart");
+    return window.parent.document.getElementById("cart-num");
   } else {
     // If in the parent window, return the local shopping cart
-    return window.document.getElementById("shopping-cart");
+    return window.document.getElementById("cart-num");
 }
 }
 
 function updateShoppingCart(item_num) {
   if(shoppingCart !== null) {
-    shoppingCart.textContent = `Shopping Cart (${item_num})`
+    shoppingCart.textContent = `(${item_num})`
   } else if (shoppingCartParent !== null) {
-    shoppingCartParent.textContent = `Shopping Cart (${item_num})`
+    shoppingCartParent.textContent = `(${item_num})`
   } else {
     console.log("none!");
   }

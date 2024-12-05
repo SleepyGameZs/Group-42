@@ -30,6 +30,14 @@
     border: solid 2px rgb(120, 120, 120);
 }
 
+.checkout-btn {
+    border: solid 2px rgb(75, 75, 75);
+}
+
+.checkout-btn:hover {
+    border: solid 2px rgb(120, 120, 120);
+}
+
 #ItemBoxing{
     border: solid 5px white;
 }
