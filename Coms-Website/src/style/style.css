@@ -20,6 +20,16 @@
     width: 100%;
 }
 
+.order-item {
+    height: 25px;
+    width: 25px;
+    border: solid 2px rgb(75, 75, 75);
+}
+
+.order-item:hover {
+    border: solid 2px rgb(120, 120, 120);
+}
+
 #ItemBoxing{
     border: solid 5px white;
 }
