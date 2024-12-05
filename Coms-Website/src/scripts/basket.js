@@ -55,7 +55,7 @@ function listItems() {
   for(let i = 0; i < item_arr.length; i++) {
     let item = item_arr[i];
     if(item !== null) {
-      container.innerHTML+=`<p>${item_count}. ${item} <button onclick='removeFromBasket(${i})'>X <\p>`;
+      container.innerHTML+=`<p>${item_count}. ${item} <button class="order-item" onclick='removeFromBasket(${i})'>X <\p>`;
       item_count++;
     }
   }
