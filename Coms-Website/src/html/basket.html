@@ -14,7 +14,22 @@
     <div class="container" id="container">
       
     </div>
-    <button class="checkout-btn" type="button" onclick="empty()">Checkout</button>
+    <br>
+    <div id="pricing">
+      <select class="checkout-select" id="payment-select" onchange="listItems()">
+        <option value="credit">Credit</option>
+        <option value="dinning-dollars">Dinning Dollars</option>
+      </select>
+      <br>
+      <p id="subtotal">Subtotal: $<span id="subtotal-num">0</span></p>
+      <p id="tax">Tax: $<span id="tax-num">0</span></p>
+      <p id="total">Total: $<span id="total-num">0</span></p>
+      <br>
+      <button class="checkout-btn" type="button" onclick="empty()">Checkout</button>
+    </div>
+
+    
+
   </section>
 
   <script src="../scripts/basket.js"></script>

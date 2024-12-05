@@ -1,4 +1,5 @@
 const container = document.getElementById("container");
+const pricing = document.getElementById("pricing");
 const shoppingCart = getShoppingCart();
 let item_arr = [];
 
@@ -43,27 +44,26 @@ function listItems() {
   //update shopping basket content
   updateShoppingCart(item_arr.length);
 
-  //if not on basket page
-  if(container == null) return;
+  //if not on basket page or no item_arr
+  if(container == null || item_arr == null) return;
+
+  //if basket is empty
+  if(item_arr.length == 0) {
+    pricing.hidden = true;
+    container.textContent = "Your basket is empty."
+    return;
+  }
 
   container.innerHTML = ""; //empty
-
-  let item_count = 1;
-  //if for some reason no item_arr
-  if(item_arr == null) return;
-
+  let item_total = 0;
   for(let i = 0; i < item_arr.length; i++) {
     let item = item_arr[i];
     if(item !== null) {
-      container.innerHTML+=`<p>${item_count}. ${item.name} - $${item.cost} <button class="order-item" onclick='removeFromBasket(${i})'>X <\p>`;
-      item_count++;
+      container.innerHTML+=`<p>${i+1}. ${item.name} - $${item.cost} <button class="order-item" onclick='removeFromBasket(${i})'>X <\p>`;
+      item_total += item.cost;
     }
-  }
-
-  //if empty disable checkout button 
-  if(item_count == 1) {
-    //TODO
-  }
+  }    
+  updatePricing(item_total);
 }
 
 function getShoppingCart() {
@@ -81,9 +81,25 @@ function updateShoppingCart(item_num) {
     shoppingCart.textContent = `(${item_num})`
   } else if (shoppingCartParent !== null) {
     shoppingCartParent.textContent = `(${item_num})`
-  } else {
-    console.log("none!");
   }
+}
+
+function updatePricing(item_total) {
+  pricing.hidden = false;
+  let payment_select = pricing.children[0];
+  let subtotal = pricing.children[2];
+  let tax = pricing.children[3];
+  let total = pricing.children[4];
+
+  //perform calculations
+  //uses 8% standard NYS sales tax
+  //.lastChild modifies only the internal <span>
+  let tax_percent = payment_select.value == "credit" ? 0.08 : 0;
+  subtotal.lastChild.textContent = item_total.toFixed(2);
+  tax.lastChild.textContent = (item_total * tax_percent).toFixed(2);
+  total.lastChild.textContent = (item_total * (1 + tax_percent)).toFixed(2);
+
+
 }
 
 window.addEventListener("DOMContentLoaded", onInit());
